@@ -1,0 +1,59 @@
+{
+  "expo": {
+    "name": "VELA",
+    "slug": "vela",
+    "version": "1.0.0",
+    "scheme": "vela",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#080814"
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "ios": {
+      "bundleIdentifier": "com.hasantncc.vela",
+      "supportsTablet": false,
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "Profil fotoğrafı seçmek için kullanılır.",
+        "NSCameraUsageDescription": "Profil fotoğrafı çekmek için kullanılır."
+      }
+    },
+    "android": {
+      "package": "com.hasantncc.vela",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#080814"
+      },
+      "permissions": [
+        "android.permission.READ_SMS",
+        "android.permission.RECEIVE_SMS"
+      ],
+      "newArchEnabled": false
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      "expo-apple-authentication",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#080814",
+          "sounds": []
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "28f02ef1-7cf0-498b-80c4-c96c0c2b9c06"
+      },
+      "router": {}
+    },
+    "owner": "hasantncc"
+  }
+}
