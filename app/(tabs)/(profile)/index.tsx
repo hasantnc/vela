@@ -376,18 +376,8 @@ export default function ProfileScreen() {
         {/* Araçlar */}
         <SectionLabel title="Araçlar" />
         <Card>
-          <Row
-            iconName="lock-closed-outline"
-            label="Günlük Limit Ayarla"
-            onPress={() => setLimitModalVisible(true)}
-            right={
-              <Text style={{ color: "#8B5CF6", fontSize: 13, fontWeight: "700", marginRight: 4 }}>
-                ₺{dailyLimit}
-              </Text>
-            }
-          />
+          <Row iconName="lock-closed-outline"    label="Günlük Limit Ayarla"  onPress={() => setLimitModalVisible(true)} right={<Text style={{ color: "#8B5CF6", fontSize: 13, fontWeight: "700", marginRight: 4 }}>₺{dailyLimit}</Text>} />
           <Row iconName="options-outline"        label="Kategori Limitleri" onPress={() => { router.push("/category-limits" as any); }} />
-          <Row iconName="mail-outline"          label="SMS İzinleri"       onPress={() => { router.push("/sms"); }} />
           <Row iconName="trending-up-outline"   label="Döviz Ayarları"     onPress={() => { router.push("/currency"); }} />
           <Row iconName="notifications-outline" label="Bildirim Ayarları"  onPress={() => { router.push("/notifications"); }} />
           <Row iconName="download-outline"      label="CSV Dışa Aktar"     onPress={() => exportTransactionsCSV(user!.uid)} last />

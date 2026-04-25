@@ -1,9 +1,9 @@
 node_modules/
 .expo/
 android/
-!android/app/google-services.json
+
 ios/
 *.keystore
 .env
 .env.local
-
+google-services.json

@@ -267,11 +267,6 @@ export default function LoginScreen() {
             </HapticPressable>
           </Link>
         </View>
-
-        <GlassCard style={{ backgroundColor: "rgba(139,92,246,0.06)", borderColor: "rgba(139,92,246,0.15)", borderRadius: 16, padding: 12 }}>
-          <Text style={{ color: C.purple, fontSize: 11, fontWeight: "700", letterSpacing: 1, textTransform: "uppercase", marginBottom: 4 }}>Demo Giriş</Text>
-          <Text selectable style={{ color: "#666", fontSize: 12 }}>test@test.com · 123456</Text>
-        </GlassCard>
       </View>
     </ScrollView>
   );

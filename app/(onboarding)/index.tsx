@@ -390,8 +390,8 @@ function PremiumScreen({ onNext, onBack }: { onNext: () => void; onBack: () => v
 
       <View style={{ gap: 10, marginBottom: 24 }}>
         {[
-          { id: "yearly", label: "Yıllık", price: "₺799", sub: "yıl · aylık ₺66 gibi", badge: "En Popüler", color: C.purple },
-          { id: "monthly", label: "Aylık", price: "₺149", sub: "ay", badge: null, color: C.sub },
+          { id: "yearly", label: "Yıllık", price: "₺799,99", sub: "yıl · aylık ₺66 gibi", badge: "En Popüler", color: C.purple },
+          { id: "monthly", label: "Aylık", price: "₺149,99", sub: "ay", badge: null, color: C.sub },
         ].map((plan) => (
           <HapticPressable key={plan.id} onPress={() => { setSelected(plan.id); }} style={{ flexDirection: "row", alignItems: "center", gap: 14, padding: 16, borderRadius: 18, borderCurve: "continuous", backgroundColor: selected === plan.id ? `${plan.color}12` : "rgba(255,255,255,0.04)", borderWidth: 2, borderColor: selected === plan.id ? plan.color : "rgba(255,255,255,0.08)" }}>
             <View style={{ width: 22, height: 22, borderRadius: 11, borderWidth: 2, borderColor: selected === plan.id ? plan.color : "#444", alignItems: "center", justifyContent: "center" }}>

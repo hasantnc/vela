@@ -315,12 +315,6 @@ export default function HomeScreen() {
               <Ionicons name="flame" size={14} color="#F59E0B" />
               <Text style={{ color: "#F59E0B", fontSize: 12, fontWeight: "700" }}>{streakCurrent} gün</Text>
             </HapticPressable>
-            <HapticPressable
-              onPress={() => router.push("/sms")}
-              style={{ backgroundColor: "rgba(139,92,246,0.12)", borderWidth: 1, borderColor: "rgba(139,92,246,0.25)", borderRadius: 14, paddingHorizontal: 12, paddingVertical: 8 }}
-            >
-              <Ionicons name="mail-outline" size={18} color="#A78BFA" />
-            </HapticPressable>
           </View>
         </View>
 

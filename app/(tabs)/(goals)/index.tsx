@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   ScrollView, View, Text,
   Modal, TextInput, KeyboardAvoidingView, ActivityIndicator,
@@ -13,6 +13,8 @@ import { usePremium } from "@/lib/context/premium";
 const FREE_GOAL_LIMIT = 3;
 import { collection, addDoc, deleteDoc, doc, updateDoc, onSnapshot, orderBy, query, serverTimestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase/config";
+import { subscribeTransactions } from "@/lib/firebase/firestore";
+import { Transaction } from "@/types";
 
 type Goal = {
   id: string;
@@ -79,6 +81,7 @@ export default function GoalsScreen() {
   const [modalVisible, setModalVisible] = useState(false);
   const [editGoal, setEditGoal] = useState<Goal | null>(null);
   const [saving, setSaving] = useState(false);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   // Form state
   const [newLabel, setNewLabel] = useState("");
@@ -98,10 +101,17 @@ export default function GoalsScreen() {
     return unsub;
   }, [user]);
 
+  useEffect(() => {
+    if (!user) return;
+    return subscribeTransactions(user.uid, setTransactions);
+  }, [user]);
+
   const change = (key: string, delta: number) =>
     setCuts((c) => ({ ...c, [key]: Math.max(0, Math.min(5, c[key as keyof typeof c] + delta)) }));
 
-  const baseSavings = 1200;
+  const totalIncome = transactions.filter((t) => t.type === "income").reduce((s, t) => s + t.amount, 0);
+  const totalExpense = transactions.filter((t) => t.type === "expense").reduce((s, t) => s + t.amount, 0);
+  const baseSavings = Math.max(totalIncome - totalExpense, 0);
   const savings = baseSavings + cuts.coffee * 200 + cuts.food * 400 + cuts.transport * 150;
 
   const openModal = (goal?: Goal) => {

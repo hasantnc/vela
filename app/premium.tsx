@@ -6,8 +6,6 @@ import { HapticPressable } from "@/components/HapticPressable";
 type IoniconsName = React.ComponentProps<typeof Ionicons>["name"];
 
 const FEATURES: { iconName: IoniconsName; title: string; desc: string; premium: boolean }[] = [
-  // Premium özellikler
-  { iconName: "chatbubble-outline",    title: "SMS Otomasyonu",        desc: "Banka SMS'lerini otomatik kaydet",       premium: true  },
   { iconName: "hardware-chip-outline", title: "Sınırsız AI Analiz",    desc: "Günde 3 sorudan fazla kişisel tavsiye", premium: true  },
   { iconName: "bar-chart-outline",     title: "Gelişmiş Analizler",    desc: "Aylık ve yıllık trend grafikleri",       premium: true  },
   { iconName: "options-outline",       title: "Kategori Limitleri",    desc: "Her kategori için ayrı bütçe",           premium: true  },
@@ -15,7 +13,6 @@ const FEATURES: { iconName: IoniconsName; title: string; desc: string; premium: 
   { iconName: "trophy-outline",        title: "Sınırsız Hedef",        desc: "3'ten fazla finansal hedef ekle",        premium: true  },
   { iconName: "share-outline",         title: "CSV Dışa Aktarma",      desc: "Verilerini Excel'e aktar",               premium: true  },
   { iconName: "notifications-outline", title: "Akıllı Bildirimler",    desc: "Limit ve tasarruf uyarıları",            premium: true  },
-  // Ücretsiz özellikler
   { iconName: "wallet-outline",        title: "Gelir / Gider Takibi",  desc: "Sınırsız işlem ekle",                   premium: false },
   { iconName: "calendar-outline",      title: "Maaş Planlayıcı",      desc: "Maaş günü bütçe dağılımı",              premium: false },
   { iconName: "ribbon-outline",        title: "Rozetler & Seriler",    desc: "Başarılarını takip et",                  premium: false },
@@ -23,7 +20,7 @@ const FEATURES: { iconName: IoniconsName; title: string; desc: string; premium: 
 
 const PLANS = [
   { id: "monthly", label: "Aylık",  price: "₺149,99",  sub: "/ay",   badge: null,           accent: false },
-  { id: "yearly",  label: "Yıllık", price: "₺1.199,99", sub: "/yıl",  badge: "%33 tasarruf", accent: true  },
+  { id: "yearly",  label: "Yıllık", price: "₺799,99",  sub: "/yıl",  badge: "%33 tasarruf", accent: true  },
 ];
 
 export default function PremiumScreen() {
@@ -37,7 +34,6 @@ export default function PremiumScreen() {
     >
       {/* Hero */}
       <View style={{ alignItems: "center", paddingTop: 40, paddingHorizontal: 28, paddingBottom: 32 }}>
-        {/* Glow orbs */}
         <View pointerEvents="none" style={{ position: "absolute", top: 0, width: 260, height: 260, borderRadius: 130, backgroundColor: "#7C3AED", opacity: 0.08 }} />
 
         <View style={{
@@ -46,7 +42,7 @@ export default function PremiumScreen() {
           borderWidth: 1.5, borderColor: "rgba(139,92,246,0.3)",
           alignItems: "center", justifyContent: "center", marginBottom: 20,
         }}>
-          <Ionicons name="diamond" size={38} color="#A78BFA" />
+          <Ionicons name="sparkles" size={38} color="#A78BFA" />
         </View>
 
         <Text style={{ color: "#fff", fontSize: 28, fontWeight: "900", letterSpacing: -0.5, marginBottom: 8 }}>
@@ -106,7 +102,7 @@ export default function PremiumScreen() {
           })}
         >
           <Text style={{ color: "#fff", fontSize: 16, fontWeight: "800" }}>Hemen Başla</Text>
-          <Text style={{ color: "rgba(255,255,255,0.5)", fontSize: 12, marginTop: 2 }}>3 gün ücretsiz · Dilediğinde iptal et</Text>
+          <Text style={{ color: "rgba(255,255,255,0.5)", fontSize: 12, marginTop: 2 }}>7 gün ücretsiz · Dilediğinde iptal et</Text>
         </HapticPressable>
       </View>
 
@@ -135,27 +131,19 @@ export default function PremiumScreen() {
               backgroundColor: f.premium ? "rgba(139,92,246,0.12)" : "rgba(255,255,255,0.04)",
               alignItems: "center", justifyContent: "center", flexShrink: 0,
             }}>
-              <Ionicons
-                name={f.iconName}
-                size={17}
-                color={f.premium ? "#A78BFA" : "#444"}
-              />
+              <Ionicons name={f.iconName} size={17} color={f.premium ? "#A78BFA" : "#444"} />
             </View>
             <View style={{ flex: 1 }}>
               <Text style={{ color: f.premium ? "#fff" : "#555", fontSize: 14, fontWeight: "600" }}>{f.title}</Text>
               <Text style={{ color: "#333", fontSize: 12, marginTop: 1 }}>{f.desc}</Text>
             </View>
             {f.premium
-              ? <Ionicons name="diamond-outline" size={14} color="#7C3AED" />
+              ? <Ionicons name="sparkles" size={14} color="#7C3AED" />
               : <Ionicons name="checkmark" size={16} color="#34D399" />
             }
           </View>
         ))}
       </View>
-
-      <Text style={{ color: "#2a2a2a", fontSize: 11, textAlign: "center", marginTop: 28, marginBottom: 8 }}>
-        App Store üzerinden yönetilir
-      </Text>
     </ScrollView>
   );
 }
