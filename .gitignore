@@ -1,6 +1,7 @@
 node_modules/
 .expo/
 android/
+!android/app/google-services.json
 ios/
 *.keystore
 .env
