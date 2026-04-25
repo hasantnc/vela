@@ -4,20 +4,30 @@ import { Ionicons } from "@expo/vector-icons";
 import { HapticPressable } from "@/components/HapticPressable";
 import { Link, useRouter } from "expo-router";
 import * as Haptics from "expo-haptics";
-import { GoogleSignin, statusCodes } from "@react-native-google-signin/google-signin";
 import * as AppleAuthentication from "expo-apple-authentication";
 import { GoogleAuthProvider, OAuthProvider, signInWithCredential } from "firebase/auth";
+import Constants from "expo-constants";
 
 import { C, AuthInput, Divider, GlassCard } from "@/components/auth/auth-ui";
 import { loginWithEmail } from "@/lib/firebase/auth";
 import { auth } from "@/lib/firebase/config";
 
-// Google Sign-In yapılandırması
-GoogleSignin.configure({
-  webClientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID_WEB,
-  iosClientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID_IOS,
-  offlineAccess: true,
-});
+// Expo Go'da Google Sign-In native modülü olmadığı için dinamik import
+const isExpoGo = Constants.appOwnership === "expo";
+const GoogleSignin = isExpoGo
+  ? null
+  : require("@react-native-google-signin/google-signin").GoogleSignin;
+const statusCodes = isExpoGo
+  ? {}
+  : require("@react-native-google-signin/google-signin").statusCodes;
+
+if (!isExpoGo && GoogleSignin) {
+  GoogleSignin.configure({
+    webClientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID_WEB,
+    iosClientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID_IOS,
+    offlineAccess: true,
+  });
+}
 
 const triggerHaptic = (type: "selection" | "success" | "error") => {
   if (type === "selection") Haptics.selectionAsync();
@@ -37,6 +47,10 @@ export default function LoginScreen() {
 
   // ── Google Auth ────────────────────────────────────────
   const handleGoogle = async () => {
+    if (isExpoGo || !GoogleSignin) {
+      Alert.alert("Bilgi", "Google girişi yalnızca APK sürümünde çalışır.");
+      return;
+    }
     triggerHaptic("selection");
     setSocialLoading("google");
     setError("");
