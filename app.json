@@ -24,18 +24,18 @@
       }
     },
     "android": {
-      "package": "com.hasantncc.vela",
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/icon.png",
-        "backgroundColor": "#080814"
-      },
-      "permissions": [
-        "android.permission.READ_SMS",
-        "android.permission.RECEIVE_SMS"
-      ],
-      "newArchEnabled": false,
-      "googleServicesFile": "./android/app/google-services.json"
-    },
+  "package": "com.hasantncc.vela",
+  "googleServicesFile": "google-services.json",
+  "adaptiveIcon": {
+    "foregroundImage": "./assets/icon.png",
+    "backgroundColor": "#080814"
+  },
+  "permissions": [
+    "android.permission.READ_SMS",
+    "android.permission.RECEIVE_SMS"
+  ],
+  "newArchEnabled": false
+},
     "plugins": [
       "expo-router",
       "expo-font",
