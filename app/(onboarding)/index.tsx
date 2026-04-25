@@ -93,10 +93,6 @@ function BackButton({ onPress }: { onPress: () => void }) {
 // ─── STEP 1: FEATURES ─────────────────────────────────────────────────────────
 const FEATURES = [
   {
-    iconName: "mail-outline", title: "SMS ile Otomatik Takip", color: C.purple,
-    desc: "Banka SMS'lerini arka planda okur, harcamaları otomatik kaydeder. Sen hiçbir şey yapma.",
-  },
-  {
     iconName: "hardware-chip-outline", title: "AI Finansal Koçun", color: C.blue,
     desc: "Haftalık harcama analizi, duygusal pattern tespiti ve kişisel öneriler. Sana özel.",
   },
@@ -269,13 +265,11 @@ function QuizScreen({ onNext, onBack, onCharacterType }: { onNext: () => void; o
 }
 
 // ─── STEP 3: SETUP ────────────────────────────────────────────────────────────
-type SetupData = { limit: string; payday: string; sms: boolean };
+type SetupData = { limit: string; payday: string };
 
 function SetupScreen({ onNext, onBack }: { onNext: (data: SetupData) => void; onBack: () => void }) {
   const [limit, setLimit] = useState("1200");
-  const [sms, setSms] = useState<boolean | null>(null);
   const [payday, setPayday] = useState("15");
-  const ready = sms !== null;
 
   return (
     <ScrollView contentInsetAdjustmentBehavior="automatic" contentContainerStyle={{ paddingTop: 56, paddingHorizontal: 24, paddingBottom: 48 }} style={{ flex: 1, backgroundColor: C.bg }}>
@@ -309,7 +303,7 @@ function SetupScreen({ onNext, onBack }: { onNext: (data: SetupData) => void; on
       </GlassCard>
 
       {/* Payday */}
-      <GlassCard style={{ marginBottom: 16 }}>
+      <GlassCard style={{ marginBottom: 32 }}>
         <View style={{ flexDirection: "row", alignItems: "center", gap: 6, marginBottom: 14 }}>
           <Ionicons name="calendar-outline" size={13} color="#888" />
           <Text style={{ color: "#888", fontSize: 11, fontWeight: "700", letterSpacing: 1.5, textTransform: "uppercase" }}>Maaş Günün</Text>
@@ -323,28 +317,8 @@ function SetupScreen({ onNext, onBack }: { onNext: (data: SetupData) => void; on
         </View>
       </GlassCard>
 
-      {/* SMS */}
-      <GlassCard style={{ marginBottom: 32 }}>
-        <View style={{ flexDirection: "row", alignItems: "center", gap: 6, marginBottom: 8 }}>
-          <Ionicons name="mail-outline" size={13} color="#888" />
-          <Text style={{ color: "#888", fontSize: 11, fontWeight: "700", letterSpacing: 1.5, textTransform: "uppercase" }}>SMS Otomatik Okuma</Text>
-        </View>
-        <Text style={{ color: "#666", fontSize: 13, lineHeight: 20, marginBottom: 14 }}>
-          Banka SMS'lerini okuyarak harcamalarını otomatik kaydedelim mi? İstediğin zaman kapatabilirsin.
-        </Text>
-        <View style={{ flexDirection: "row", gap: 10 }}>
-          <HapticPressable onPress={() => { setSms(false); }} style={{ flex: 1, paddingVertical: 12, backgroundColor: sms === false ? "rgba(248,113,113,0.15)" : "rgba(255,255,255,0.05)", borderWidth: 1, borderColor: sms === false ? "#F87171" : "rgba(255,255,255,0.08)", borderRadius: 14, borderCurve: "continuous", alignItems: "center" }}>
-            <Text style={{ color: sms === false ? "#F87171" : C.sub, fontSize: 14, fontWeight: "700" }}>Hayır</Text>
-          </HapticPressable>
-          <HapticPressable onPress={() => { setSms(true); }} style={{ flex: 2, paddingVertical: 12, backgroundColor: sms === true ? "rgba(52,211,153,0.15)" : "rgba(255,255,255,0.05)", borderWidth: 1, borderColor: sms === true ? C.teal : "rgba(255,255,255,0.08)", borderRadius: 14, borderCurve: "continuous", alignItems: "center", flexDirection: "row", justifyContent: "center", gap: 6 }}>
-            <Ionicons name="checkmark-outline" size={15} color={sms === true ? C.teal : C.sub} />
-            <Text style={{ color: sms === true ? C.teal : C.sub, fontSize: 14, fontWeight: "700" }}>Evet, izin ver</Text>
-          </HapticPressable>
-        </View>
-      </GlassCard>
-
-      <PrimaryBtn onPress={() => { success(); onNext({ limit, payday, sms: sms ?? false }); }} disabled={!ready}>
-        {ready ? "VELA'ya Başla →" : "SMS iznini seç"}
+      <PrimaryBtn onPress={() => { success(); onNext({ limit, payday }); }}>
+        VELA'ya Başla →
       </PrimaryBtn>
     </ScrollView>
   );
@@ -372,7 +346,6 @@ function PremiumScreen({ onNext, onBack }: { onNext: () => void; onBack: () => v
 
       <GlassCard style={{ marginBottom: 20, backgroundColor: "rgba(245,158,11,0.06)", borderColor: "rgba(245,158,11,0.18)" }}>
         {[
-          { icon: "mail-outline",           label: "SMS otomatik okuma" },
           { icon: "hardware-chip-outline",  label: "AI haftalık rapor & analiz" },
           { icon: "happy-outline",          label: "Pişmanlık skoru sistemi" },
           { icon: "swap-horizontal-outline",label: "Döviz koruma modu" },
@@ -390,7 +363,7 @@ function PremiumScreen({ onNext, onBack }: { onNext: () => void; onBack: () => v
 
       <View style={{ gap: 10, marginBottom: 24 }}>
         {[
-          { id: "yearly", label: "Yıllık", price: "₺799,99", sub: "yıl · aylık ₺66 gibi", badge: "En Popüler", color: C.purple },
+          { id: "yearly", label: "Yıllık", price: "₺1.199,99", sub: "yıl · aylık ₺99 gibi", badge: "En Popüler", color: C.purple },
           { id: "monthly", label: "Aylık", price: "₺149,99", sub: "ay", badge: null, color: C.sub },
         ].map((plan) => (
           <HapticPressable key={plan.id} onPress={() => { setSelected(plan.id); }} style={{ flexDirection: "row", alignItems: "center", gap: 14, padding: 16, borderRadius: 18, borderCurve: "continuous", backgroundColor: selected === plan.id ? `${plan.color}12` : "rgba(255,255,255,0.04)", borderWidth: 2, borderColor: selected === plan.id ? plan.color : "rgba(255,255,255,0.08)" }}>
@@ -428,7 +401,6 @@ function ReadyScreen({ onFinish, setup, characterType }: {
 }) {
   const summaryItems = [
     `Günlük limit: ₺${Number(setup.limit).toLocaleString("tr-TR")}`,
-    setup.sms ? "SMS okuma aktif" : "SMS okuma kapalı",
     `Her ayın ${setup.payday}'inde maaş günü`,
     `Karakter: ${characterType || "Belirlendi"}`,
   ];
@@ -471,7 +443,7 @@ export default function OnboardingScreen() {
   const { user } = useAuth();
   const [step, setStep] = useState(0);
   const [characterType, setCharacterType] = useState("impulsive");
-  const [setupData, setSetupData] = useState<SetupData>({ limit: "1200", payday: "15", sms: false });
+  const [setupData, setSetupData] = useState<SetupData>({ limit: "1200", payday: "15" });
 
   const next = () => setStep((s) => Math.min(s + 1, STEPS));
   const back = () => setStep((s) => Math.max(s - 1, 0));
@@ -489,7 +461,6 @@ export default function OnboardingScreen() {
           updateUserDoc(user.uid, {
             characterType: characterType as any,
             payday: { paydayDay: Number(setupData.payday) || 15 },
-            smsEnabled: setupData.sms,
           } as any),
         ]);
       } catch {}

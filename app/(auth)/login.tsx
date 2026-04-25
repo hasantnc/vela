@@ -149,7 +149,7 @@ export default function LoginScreen() {
           label="E-posta"
           value={email}
           onChangeText={setEmail}
-          placeholder="ahmet@email.com"
+          placeholder="ornek@email.com"
           keyboardType="email-address"
           error={error}
         />

@@ -149,7 +149,7 @@ export default function AIScreen() {
         headerLargeTitle: false,
         headerLeft: () => (
           <View style={{ width: 32, height: 32, borderRadius: 10, backgroundColor: "rgba(139,92,246,0.2)", borderWidth: 1, borderColor: "rgba(139,92,246,0.3)", alignItems: "center", justifyContent: "center", marginLeft: 4 }}>
-            <Ionicons name="sparkles" size={16} color="#A78BFA" />
+            <Ionicons name="diamond" size={16} color="#A78BFA" />
           </View>
         ),
       }} />

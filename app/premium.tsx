@@ -19,8 +19,8 @@ const FEATURES: { iconName: IoniconsName; title: string; desc: string; premium: 
 ];
 
 const PLANS = [
-  { id: "monthly", label: "Aylık",  price: "₺149,99",  sub: "/ay",   badge: null,           accent: false },
-  { id: "yearly",  label: "Yıllık", price: "₺799,99",  sub: "/yıl",  badge: "%33 tasarruf", accent: true  },
+  { id: "monthly", label: "Aylık",  price: "₺149,99",   sub: "/ay",   badge: null,           accent: false },
+  { id: "yearly",  label: "Yıllık", price: "₺1.199,99", sub: "/yıl",  badge: "%33 tasarruf", accent: true  },
 ];
 
 export default function PremiumScreen() {
@@ -42,7 +42,7 @@ export default function PremiumScreen() {
           borderWidth: 1.5, borderColor: "rgba(139,92,246,0.3)",
           alignItems: "center", justifyContent: "center", marginBottom: 20,
         }}>
-          <Ionicons name="sparkles" size={38} color="#A78BFA" />
+          <Ionicons name="diamond" size={38} color="#A78BFA" />
         </View>
 
         <Text style={{ color: "#fff", fontSize: 28, fontWeight: "900", letterSpacing: -0.5, marginBottom: 8 }}>

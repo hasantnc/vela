@@ -181,9 +181,9 @@ export default function GoalsScreen() {
         contentContainerStyle={{ padding: 20, gap: 14, paddingBottom: 110 }}
       >
         <View style={{ backgroundColor: "rgba(16,185,129,0.08)", borderWidth: 1, borderColor: "rgba(16,185,129,0.18)", borderRadius: 22, padding: 18, borderCurve: "continuous" }}>
-          <Text style={{ color: "#10B981", fontSize: 11, fontWeight: "700", letterSpacing: 1.5, textTransform: "uppercase", marginBottom: 4 }}>Finansal Durum</Text>
+          <Text style={{ color: "#10B981", fontSize: 11, fontWeight: "700", letterSpacing: 1.5, textTransform: "uppercase", marginBottom: 4 }}>Hedefler</Text>
           <Text style={{ color: "#fff", fontSize: 15, fontWeight: "600" }}>
-            {goals.length} aktif hedef · Aylık {symbol}{convert(savings)} tasarruf
+            {goals.length === 0 ? "Henüz hedef eklenmedi" : `${goals.length} aktif hedef`}
           </Text>
         </View>
 

@@ -21,7 +21,7 @@
       "env": {
         "NPM_CONFIG_LEGACY_PEER_DEPS": "true",
         "GOOGLE_SERVICES_JSON": "./google-services.json",
-        "EXPO_PUBLIC_OPENAI_KEY": "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",
+        "EXPO_PUBLIC_OPENAI_KEY": "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",
         "EXPO_PUBLIC_GOOGLE_CLIENT_ID_WEB": "887243596745-4219fn13pv09u64mkiiih8cnt0q73rjo.apps.googleusercontent.com",
         "EXPO_PUBLIC_GOOGLE_CLIENT_ID_IOS": "251412133104-3g6fmjrr4dotvcg5o9bnbkhju52ipg86.apps.googleusercontent.com",
         "EXPO_PUBLIC_GOOGLE_CLIENT_ID_ANDROID": "887243596745-6al116hqs1epp8ho9altpbfb5jifumia.apps.googleusercontent.com"

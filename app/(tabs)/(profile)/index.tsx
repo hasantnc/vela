@@ -243,7 +243,6 @@ export default function ProfileScreen() {
               {/* Feature list */}
               <View style={{ gap: 7, marginBottom: 16 }}>
                 {[
-                  { icon: "chatbubble-outline" as const,    label: "SMS otomatik okuma" },
                   { icon: "hardware-chip-outline" as const, label: "AI haftalık rapor" },
                   { icon: "trending-up-outline" as const,   label: "Döviz koruması" },
                   { icon: "heart-outline" as const,         label: "Pişmanlık skoru" },
@@ -335,8 +334,7 @@ export default function ProfileScreen() {
         <SectionLabel title="Bildirimler" />
         <Card>
           {[
-            { key: "pushNotifications", iconName: "notifications-outline" as IoniconsName, label: "Push Bildirimler", last: false },
-            { key: "smsAnalysis",       iconName: "chatbubble-outline" as IoniconsName,    label: "SMS Analizi",       last: true  },
+            { key: "pushNotifications", iconName: "notifications-outline" as IoniconsName, label: "Push Bildirimler", last: true },
           ].map((item) => (
             <Row
               key={item.key}
