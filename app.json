@@ -33,12 +33,14 @@
         "android.permission.READ_SMS",
         "android.permission.RECEIVE_SMS"
       ],
-      "newArchEnabled": false
+      "newArchEnabled": false,
+      "googleServicesFile": "./android/app/google-services.json"
     },
     "plugins": [
       "expo-router",
       "expo-font",
       "expo-apple-authentication",
+      "@react-native-google-signin/google-signin",
       [
         "expo-notifications",
         {

@@ -1,17 +1,23 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { View, Text, ScrollView, Alert, ActivityIndicator, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { HapticPressable } from "@/components/HapticPressable";
 import { Link, useRouter } from "expo-router";
 import * as Haptics from "expo-haptics";
-import * as Google from "expo-auth-session/providers/google";
-import { Prompt } from "expo-auth-session";
+import { GoogleSignin, statusCodes } from "@react-native-google-signin/google-signin";
 import * as AppleAuthentication from "expo-apple-authentication";
 import { GoogleAuthProvider, OAuthProvider, signInWithCredential } from "firebase/auth";
 
-import { C, AuthInput, PrimaryBtn, Divider, GlassCard } from "@/components/auth/auth-ui";
+import { C, AuthInput, Divider, GlassCard } from "@/components/auth/auth-ui";
 import { loginWithEmail } from "@/lib/firebase/auth";
 import { auth } from "@/lib/firebase/config";
+
+// Google Sign-In yapılandırması
+GoogleSignin.configure({
+  webClientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID_WEB,
+  iosClientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID_IOS,
+  offlineAccess: true,
+});
 
 const triggerHaptic = (type: "selection" | "success" | "error") => {
   if (type === "selection") Haptics.selectionAsync();
@@ -19,62 +25,42 @@ const triggerHaptic = (type: "selection" | "success" | "error") => {
   if (type === "error") Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
 };
 
-const GOOGLE_IOS     = process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID_IOS;
-const GOOGLE_ANDROID = process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID_ANDROID;
-const GOOGLE_WEB     = process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID_WEB;
-
 export default function LoginScreen() {
   const router = useRouter();
-  const [email,   setEmail]   = useState("");
-  const [pass,    setPass]    = useState("");
-  const [error,   setError]   = useState("");
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [socialLoading, setSocialLoading] = useState<"google" | "apple" | null>(null);
 
   const valid = email.includes("@") && pass.length >= 6;
 
   // ── Google Auth ────────────────────────────────────────
-  const [, googleResponse, promptGoogleAsync] = Google.useAuthRequest({
-    iosClientId: GOOGLE_IOS,
-    webClientId:  GOOGLE_WEB,
-    prompt: Prompt.SelectAccount,
-  });
-
-  useEffect(() => {
-    if (googleResponse?.type === "success") {
-      const idToken     = googleResponse.authentication?.idToken;
-      const accessToken = googleResponse.authentication?.accessToken;
-      if (!idToken && !accessToken) {
-        setSocialLoading(null);
-        setError("Google girişi başarısız.");
-        return;
-      }
-      const credential = GoogleAuthProvider.credential(idToken ?? null, accessToken);
-      signInWithCredential(auth, credential)
-        .then(() => {
-          triggerHaptic("success");
-          router.replace("/(tabs)");
-        })
-        .catch(() => {
-          setError("Google girişi başarısız.");
-          setSocialLoading(null);
-        });
-    } else if (googleResponse?.type === "error" || googleResponse?.type === "dismiss") {
-      setSocialLoading(null);
-    }
-  }, [googleResponse]);
-
-  const handleGoogle = () => {
-    if (!GOOGLE_WEB && !GOOGLE_IOS && !GOOGLE_ANDROID) {
-      Alert.alert(
-        "Google Girişi Yapılandırılmamış",
-        "Google ile giriş için .env dosyasına şunları ekle:\nEXPO_PUBLIC_GOOGLE_CLIENT_ID_WEB\nEXPO_PUBLIC_GOOGLE_CLIENT_ID_IOS\nEXPO_PUBLIC_GOOGLE_CLIENT_ID_ANDROID\n\nGoogle Cloud Console'dan OAuth 2.0 istemcisi oluştur."
-      );
-      return;
-    }
+  const handleGoogle = async () => {
     triggerHaptic("selection");
     setSocialLoading("google");
-    promptGoogleAsync();
+    setError("");
+    try {
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+      const idToken = userInfo.data?.idToken;
+      if (!idToken) throw new Error("no_token");
+      const credential = GoogleAuthProvider.credential(idToken);
+      await signInWithCredential(auth, credential);
+      triggerHaptic("success");
+      router.replace("/(tabs)");
+    } catch (e: any) {
+      if (e.code === statusCodes.SIGN_IN_CANCELLED) {
+        // kullanıcı iptal etti
+      } else if (e.code === statusCodes.IN_PROGRESS) {
+        // zaten işlem var
+      } else {
+        setError("Google girişi başarısız. Tekrar dene.");
+        triggerHaptic("error");
+      }
+    } finally {
+      setSocialLoading(null);
+    }
   };
 
   // ── Apple Auth ─────────────────────────────────────────
@@ -94,7 +80,7 @@ export default function LoginScreen() {
       });
       const { identityToken } = cred;
       if (!identityToken) throw new Error("no_token");
-      const provider   = new OAuthProvider("apple.com");
+      const provider = new OAuthProvider("apple.com");
       const firebaseCred = provider.credential({ idToken: identityToken });
       await signInWithCredential(auth, firebaseCred);
       triggerHaptic("success");
@@ -120,7 +106,11 @@ export default function LoginScreen() {
     } catch (e: any) {
       triggerHaptic("error");
       const code = e?.code || "";
-      if (code === "auth/user-not-found" || code === "auth/wrong-password" || code === "auth/invalid-credential") {
+      if (
+        code === "auth/user-not-found" ||
+        code === "auth/wrong-password" ||
+        code === "auth/invalid-credential"
+      ) {
         setError("E-posta veya şifre hatalı.");
       } else if (code === "auth/too-many-requests") {
         setError("Çok fazla deneme. Lütfen bekle.");
@@ -155,8 +145,22 @@ export default function LoginScreen() {
 
       {/* Form */}
       <View style={{ paddingHorizontal: 28, paddingTop: 40 }}>
-        <AuthInput label="E-posta" value={email} onChangeText={setEmail} placeholder="ahmet@email.com" keyboardType="email-address" error={error} />
-        <AuthInput label="Şifre" value={pass} onChangeText={setPass} placeholder="••••••••" secureTextEntry hint="En az 6 karakter" />
+        <AuthInput
+          label="E-posta"
+          value={email}
+          onChangeText={setEmail}
+          placeholder="ahmet@email.com"
+          keyboardType="email-address"
+          error={error}
+        />
+        <AuthInput
+          label="Şifre"
+          value={pass}
+          onChangeText={setPass}
+          placeholder="••••••••"
+          secureTextEntry
+          hint="En az 6 karakter"
+        />
 
         <View style={{ alignItems: "flex-end", marginBottom: 24, marginTop: -8 }}>
           <Link href="/(auth)/forgot-password" asChild>
@@ -186,7 +190,9 @@ export default function LoginScreen() {
           ) : (
             <>
               <Ionicons name="lock-open-outline" size={18} color={!valid ? "#333" : "#fff"} />
-              <Text style={{ color: !valid ? "#333" : "#fff", fontSize: 16, fontWeight: "800", letterSpacing: 0.3 }}>Giriş Yap</Text>
+              <Text style={{ color: !valid ? "#333" : "#fff", fontSize: 16, fontWeight: "800", letterSpacing: 0.3 }}>
+                Giriş Yap
+              </Text>
             </>
           )}
         </HapticPressable>
