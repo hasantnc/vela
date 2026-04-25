@@ -66,7 +66,7 @@ const Stepper = ({ value, onDecrement, onIncrement }: any) => (
 const SIM_ITEMS = [
   { key: "coffee",    label: "Kahve azalt",     iconName: "cafe-outline" },
   { key: "food",      label: "Dışarıda yeme",   iconName: "restaurant-outline" },
-  { key: "transport", label: "Uber → Metro",    iconName: "subway-outline" },
+  { key: "transport", label: "Uber > Metro",    iconName: "subway-outline" },
 ];
 
 export default function GoalsScreen() {

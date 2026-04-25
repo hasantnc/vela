@@ -138,7 +138,7 @@ export default function PremiumScreen() {
               <Text style={{ color: "#333", fontSize: 12, marginTop: 1 }}>{f.desc}</Text>
             </View>
             {f.premium
-              ? <Ionicons name="sparkles" size={14} color="#7C3AED" />
+              ? <Ionicons name="diamond-outline" size={14} color="#7C3AED" />
               : <Ionicons name="checkmark" size={16} color="#34D399" />
             }
           </View>

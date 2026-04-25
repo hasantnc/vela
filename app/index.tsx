@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { View, ActivityIndicator } from "react-native";
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -7,7 +7,6 @@ import { auth } from "@/lib/firebase/config";
 
 export default function Index() {
   const router = useRouter();
-  const handled = useRef(false);
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async (user) => {
@@ -19,7 +18,7 @@ export default function Index() {
       const val = await AsyncStorage.getItem("onboarding_done");
 
       if (val === "true") {
-        router.push("/(tabs)/(home)");
+        router.replace("/(tabs)/(home)");
       } else {
         router.replace("/(onboarding)");
       }

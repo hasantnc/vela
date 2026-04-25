@@ -155,8 +155,8 @@ export default function AIScreen() {
       }} />
       <KeyboardAvoidingView
         style={{ flex: 1, backgroundColor: "#06060F" }}
-        behavior={process.env.EXPO_OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={88}
+        behavior={process.env.EXPO_OS === "ios" ? "padding" : undefined}
+        keyboardVerticalOffset={process.env.EXPO_OS === "ios" ? 88 : 0}
       >
         <ScrollView
           ref={scrollRef}
@@ -256,7 +256,7 @@ export default function AIScreen() {
               </Text>
               {aiUsedToday >= FREE_AI_LIMIT && (
                 <HapticPressable onPress={() => router.push("/premium")}>
-                  <Text style={{ color: "#F59E0B", fontSize: 12, fontWeight: "700" }}>Geç →</Text>
+                  <Text style={{ color: "#F59E0B", fontSize: 12, fontWeight: "700" }}>Geç</Text>
                 </HapticPressable>
               )}
             </View>

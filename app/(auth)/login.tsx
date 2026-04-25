@@ -165,7 +165,7 @@ export default function LoginScreen() {
         <View style={{ alignItems: "flex-end", marginBottom: 24, marginTop: -8 }}>
           <Link href="/(auth)/forgot-password" asChild>
             <HapticPressable>
-              <Text style={{ color: C.purple, fontSize: 13, fontWeight: "600" }}>Şifremi unuttum →</Text>
+              <Text style={{ color: C.purple, fontSize: 13, fontWeight: "600" }}>Şifremi unuttum</Text>
             </HapticPressable>
           </Link>
         </View>

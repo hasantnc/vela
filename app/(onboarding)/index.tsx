@@ -66,7 +66,7 @@ function SplashScreen({ onNext }: { onNext: () => void }) {
           Para yönetimini bir sonraki seviyeye taşı. AI destekli, akıllı, kişisel.
         </Text>
 
-        <PrimaryBtn onPress={() => { onNext(); }}>Başlayalım →</PrimaryBtn>
+        <PrimaryBtn onPress={() => { onNext(); }}>Başlayalım</PrimaryBtn>
         <Text style={{ color: "#333", fontSize: 13, marginTop: 16 }}>Ücretsiz • 7 gün Premium deneme</Text>
       </View>
     </ScrollView>
@@ -141,13 +141,13 @@ function FeaturesScreen({ onNext, onBack }: { onNext: () => void; onBack: () => 
           </HapticPressable>
           <HapticPressable onPress={() => { active < FEATURES.length - 1 ? setActive((a) => a + 1) : onNext(); }} style={{ flex: 2, paddingVertical: 16, backgroundColor: feat.color, borderRadius: 16, borderCurve: "continuous", alignItems: "center", boxShadow: `0 8px 28px ${feat.color}44` }}>
             <Text style={{ color: C.white, fontSize: 15, fontWeight: "800" }}>
-              {active < FEATURES.length - 1 ? "Devam →" : "Harika, Devam Et →"}
+              {active < FEATURES.length - 1 ? "Devam" : "Harika, Devam Et"}
             </Text>
           </HapticPressable>
         </View>
 
         <HapticPressable onPress={() => { onNext(); }} style={{ marginTop: 12, alignItems: "center", paddingVertical: 10 }}>
-          <Text style={{ color: "#444", fontSize: 13 }}>Atla →</Text>
+          <Text style={{ color: "#444", fontSize: 13 }}>Atla</Text>
         </HapticPressable>
       </View>
     </ScrollView>
@@ -225,7 +225,7 @@ function QuizScreen({ onNext, onBack, onCharacterType }: { onNext: () => void; o
           <GlassCard style={{ marginBottom: 28, backgroundColor: `${result.color}0A`, borderColor: `${result.color}25`, width: "100%" }}>
             <Text selectable style={{ color: "#bbb", fontSize: 15, lineHeight: 26 }}>{result.desc}</Text>
           </GlassCard>
-          <PrimaryBtn onPress={() => { onNext(); }} color={result.color}>Devam Et →</PrimaryBtn>
+          <PrimaryBtn onPress={() => { onNext(); }} color={result.color}>Devam Et</PrimaryBtn>
         </View>
       </ScrollView>
     );
@@ -318,7 +318,7 @@ function SetupScreen({ onNext, onBack }: { onNext: (data: SetupData) => void; on
       </GlassCard>
 
       <PrimaryBtn onPress={() => { success(); onNext({ limit, payday }); }}>
-        VELA'ya Başla →
+        VELA'ya Başla
       </PrimaryBtn>
     </ScrollView>
   );
@@ -387,7 +387,7 @@ function PremiumScreen({ onNext, onBack }: { onNext: () => void; onBack: () => v
         <Text style={{ color: "#000", fontSize: 16, fontWeight: "900" }}>7 Gün Ücretsiz Başla</Text>
       </HapticPressable>
       <HapticPressable onPress={() => { onNext(); }} style={{ alignItems: "center", paddingVertical: 12 }}>
-        <Text style={{ color: "#444", fontSize: 13 }}>Ücretsiz devam et →</Text>
+        <Text style={{ color: "#444", fontSize: 13 }}>Ücretsiz devam et</Text>
       </HapticPressable>
     </ScrollView>
   );
@@ -428,7 +428,7 @@ function ReadyScreen({ onFinish, setup, characterType }: {
         </View>
 
         <PrimaryBtn onPress={onFinish} color={C.green}>
-          Hadi Başlayalım →
+          Hadi Başlayalım
         </PrimaryBtn>
       </View>
     </ScrollView>

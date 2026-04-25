@@ -418,7 +418,7 @@ export default function HomeScreen() {
                 {aiInsight ?? "Harcama verilerin analiz ediliyor..."}
               </Text>
             </View>
-            <Text style={{ color: "#10B981", fontSize: 16, alignSelf: "center" }}>→</Text>
+            <Text style={{ color: "#10B981", fontSize: 16, alignSelf: "center" }}>{'>'}</Text>
           </View>
         </HapticPressable>
 
@@ -427,7 +427,7 @@ export default function HomeScreen() {
           <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
             <Text style={{ color: "#fff", fontSize: 15, fontWeight: "700" }}>Son İşlemler</Text>
             <HapticPressable onPress={() => router.push("/history" as any)}>
-              <Text style={{ color: "#8B5CF6", fontSize: 13, fontWeight: "700" }}>Tümü →</Text>
+              <Text style={{ color: "#8B5CF6", fontSize: 13, fontWeight: "700" }}>Tümü</Text>
             </HapticPressable>
           </View>
           <View style={{ gap: 8 }}>

@@ -27,17 +27,16 @@ export default function RootLayout() {
           <Stack.Screen name="(auth)"        options={{ headerShown: false }} />
           <Stack.Screen name="(onboarding)"  options={{ headerShown: false }} />
           <Stack.Screen name="(tabs)"        options={{ headerShown: false }} />
-          <Stack.Screen name="streak"        options={{ ...SCREEN_DEFAULTS, title: "Streak 🔥" }} />
+          <Stack.Screen name="streak"        options={{ ...SCREEN_DEFAULTS, title: "Streak" }} />
           <Stack.Screen name="badges"        options={{ ...SCREEN_DEFAULTS, title: "Rozetler" }} />
-          <Stack.Screen name="regret"        options={{ ...SCREEN_DEFAULTS, title: "Pişmanlıklar" }} />
-          <Stack.Screen name="payday"        options={{ ...SCREEN_DEFAULTS, title: "Maaş Günü" }} />
-          <Stack.Screen name="history"       options={{ ...SCREEN_DEFAULTS, title: "Geçmiş" }} />
-          <Stack.Screen name="currency"      options={{ ...SCREEN_DEFAULTS, title: "Döviz Koruması 💱" }} />
-          <Stack.Screen name="sms"           options={{ ...SCREEN_DEFAULTS, title: "SMS Analiz 📩" }} />
+          <Stack.Screen name="regret"        options={{ ...SCREEN_DEFAULTS, title: "Pismanlıklar" }} />
+          <Stack.Screen name="payday"        options={{ ...SCREEN_DEFAULTS, title: "Maas Gunu" }} />
+          <Stack.Screen name="history"       options={{ ...SCREEN_DEFAULTS, title: "Gecmis" }} />
+          <Stack.Screen name="currency"      options={{ ...SCREEN_DEFAULTS, title: "Doviz Korumasi" }} />
           <Stack.Screen name="notifications" options={{ ...SCREEN_DEFAULTS, title: "Bildirimler" }} />
-          <Stack.Screen name="premium"       options={{ ...SCREEN_DEFAULTS, title: "Premium 💎" }} />
+          <Stack.Screen name="premium"       options={{ ...SCREEN_DEFAULTS, title: "Premium" }} />
           <Stack.Screen name="category-limits" options={{ ...SCREEN_DEFAULTS, title: "Kategori Limitleri" }} />
-          <Stack.Screen name="privacy"        options={{ ...SCREEN_DEFAULTS, title: "Gizlilik Politikası" }} />
+          <Stack.Screen name="privacy"        options={{ ...SCREEN_DEFAULTS, title: "Gizlilik Politikasi" }} />
         </Stack>
       </CurrencyProvider>
       </PremiumProvider>
