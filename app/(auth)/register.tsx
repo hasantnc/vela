@@ -19,10 +19,10 @@ function passStrength(pass: string) {
 }
 
 const BENEFITS = [
-  { icon: "diamond-outline",       label: "7 gün ücretsiz Premium" },
-  { icon: "mail-outline",          label: "SMS otomatik okuma" },
   { icon: "hardware-chip-outline", label: "AI haftalık rapor" },
+  { icon: "document-text-outline", label: "PDF ekstre analizi" },
   { icon: "analytics-outline",     label: "Finansal karakter analizi" },
+  { icon: "trophy-outline",        label: "Rozet & seviye sistemi" },
 ];
 
 const PASSWORD_RULES = [

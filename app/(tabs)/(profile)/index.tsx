@@ -8,7 +8,7 @@ import { setDailyLimit, getDailyLimit } from "@/lib/firebase/firestore";
 import { exportTransactionsCSV } from "@/lib/export/csv";
 import { useCurrency } from "@/lib/context/currency";
 import { useHaptics } from "@/lib/context/haptics";
-
+import { usePremium } from "@/lib/context/premium";
 type IoniconsName = React.ComponentProps<typeof Ionicons>["name"];
 
 const LANGUAGES = ["Türkçe", "English"];
@@ -101,7 +101,7 @@ const Row = ({
 };
 
 export default function ProfileScreen() {
-  const [premium] = useState(false);
+  const { isPremium: premium } = usePremium();
   const [limitModalVisible, setLimitModalVisible] = useState(false);
   const [dailyLimit, setDailyLimitState] = useState("1200");
   const [language, setLanguage] = useState("Türkçe");
@@ -266,7 +266,7 @@ export default function ProfileScreen() {
                 })}
               >
                 <Ionicons name="diamond" size={15} color="#000" />
-                <Text style={{ color: "#000", fontSize: 15, fontWeight: "900" }}>7 Gün Ücretsiz Dene</Text>
+                <Text style={{ color: "#000", fontSize: 15, fontWeight: "900" }}>Premium'a Geç</Text>
               </HapticPressable>
             </View>
           </View>

@@ -12,7 +12,7 @@ import { C, AuthInput, Divider, GlassCard } from "@/components/auth/auth-ui";
 import { loginWithEmail } from "@/lib/firebase/auth";
 import { auth } from "@/lib/firebase/config";
 
-// Expo Go'da Google Sign-In native modülü olmadığı için dinamik import
+// Expo Go'da native modüller olmadığı için dinamik import
 const isExpoGo = Constants.appOwnership === "expo";
 const GoogleSignin = isExpoGo
   ? null
@@ -79,6 +79,10 @@ export default function LoginScreen() {
 
   // ── Apple Auth ─────────────────────────────────────────
   const handleApple = async () => {
+    if (isExpoGo) {
+      Alert.alert("Bilgi", "Apple girişi yalnızca APK/TestFlight sürümünde çalışır.");
+      return;
+    }
     if (process.env.EXPO_OS !== "ios") {
       Alert.alert("Apple ile giriş yalnızca iOS cihazlarda kullanılabilir.");
       return;

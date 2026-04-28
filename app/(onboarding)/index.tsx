@@ -67,7 +67,7 @@ function SplashScreen({ onNext }: { onNext: () => void }) {
         </Text>
 
         <PrimaryBtn onPress={() => { onNext(); }}>Başlayalım</PrimaryBtn>
-        <Text style={{ color: "#333", fontSize: 13, marginTop: 16 }}>Ücretsiz • 7 gün Premium deneme</Text>
+        <Text style={{ color: "#333", fontSize: 13, marginTop: 16 }}>Tamamen ücretsiz başla</Text>
       </View>
     </ScrollView>
   );
@@ -340,7 +340,7 @@ function PremiumScreen({ onNext, onBack }: { onNext: () => void; onBack: () => v
         <View style={{ width: 70, height: 70, borderRadius: 24, borderCurve: "continuous", backgroundColor: "rgba(245,158,11,0.15)", borderWidth: 2, borderColor: "rgba(245,158,11,0.3)", alignItems: "center", justifyContent: "center", marginBottom: 16, boxShadow: "0 0 40px rgba(245,158,11,0.2)" }}>
           <Ionicons name="diamond" size={34} color={C.amber} />
         </View>
-        <Text style={{ color: C.white, fontSize: 26, fontWeight: "900", marginBottom: 6 }}>7 Gün Ücretsiz Dene</Text>
+        <Text style={{ color: C.white, fontSize: 26, fontWeight: "900", marginBottom: 6 }}>VELA Premium</Text>
         <Text style={{ color: "#888", fontSize: 14 }}>İstediğin zaman iptal et, taahhüt yok</Text>
       </View>
 
@@ -384,7 +384,7 @@ function PremiumScreen({ onNext, onBack }: { onNext: () => void; onBack: () => v
 
       <HapticPressable onPress={() => { success(); onNext(); }} style={{ paddingVertical: 18, borderRadius: 18, borderCurve: "continuous", alignItems: "center", justifyContent: "center", flexDirection: "row", gap: 8, backgroundColor: C.amber, boxShadow: "0 8px 28px rgba(245,158,11,0.4)", marginBottom: 12 }}>
         <Ionicons name="diamond" size={18} color="#000" />
-        <Text style={{ color: "#000", fontSize: 16, fontWeight: "900" }}>7 Gün Ücretsiz Başla</Text>
+        <Text style={{ color: "#000", fontSize: 16, fontWeight: "900" }}>Premium'a Geç</Text>
       </HapticPressable>
       <HapticPressable onPress={() => { onNext(); }} style={{ alignItems: "center", paddingVertical: 12 }}>
         <Text style={{ color: "#444", fontSize: 13 }}>Ücretsiz devam et</Text>
